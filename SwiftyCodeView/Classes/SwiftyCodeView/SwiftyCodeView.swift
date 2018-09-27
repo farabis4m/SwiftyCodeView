@@ -100,6 +100,11 @@ open class SwiftyCodeView: UIControl {
 
 extension SwiftyCodeView: UITextFieldDelegate, SwiftyCodeTextFieldDelegate {
     
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        textField.text = ""
+    }
+    
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if string == "" { //is backspace
@@ -133,7 +138,7 @@ extension SwiftyCodeView: UITextFieldDelegate, SwiftyCodeTextFieldDelegate {
             
             let prevItem = stackView.arrangedSubviews[i-1] as! SwiftyCodeItemView
             _ = prevItem.becomeFirstResponder()
-            prevItem.textField.text = ""
+            // prevItem.textField.text = ""
         }
         sendActions(for: .valueChanged)
     }

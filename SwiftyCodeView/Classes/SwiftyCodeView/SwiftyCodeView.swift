@@ -9,6 +9,11 @@ import UIKit
 @objc
 public protocol SwiftyCodeViewDelegate: class {
     func codeView(sender: SwiftyCodeView, didFinishInput code: String)
+    func codeView(sender: SwiftyCodeView, didChangeInput code: String)
+}
+
+extension SwiftyCodeViewDelegate {
+    func codeView(sender: SwiftyCodeView, didChangeInput code: String) {}
 }
 
 @IBDesignable
@@ -121,7 +126,7 @@ extension SwiftyCodeView: UITextFieldDelegate, SwiftyCodeTextFieldDelegate {
                 textField.resignFirstResponder()
                 return false
             }
-            
+            delegate?.codeView(sender: self, didChangeInput: self.code + string)
             _ = stackView.arrangedSubviews[index + 1].becomeFirstResponder()
         }
         

@@ -126,7 +126,6 @@ extension SwiftyCodeView: UITextFieldDelegate, SwiftyCodeTextFieldDelegate {
                 textField.resignFirstResponder()
                 return false
             }
-            delegate?.codeView(sender: self, didChangeInput: self.code + string)
             _ = stackView.arrangedSubviews[index + 1].becomeFirstResponder()
         }
         
@@ -144,6 +143,9 @@ extension SwiftyCodeView: UITextFieldDelegate, SwiftyCodeTextFieldDelegate {
             let prevItem = stackView.arrangedSubviews[i-1] as! SwiftyCodeItemView
             _ = prevItem.becomeFirstResponder()
             // prevItem.textField.text = ""
+            
+            delegate?.codeView(sender: self, didChangeInput: sender.text ?? "")
+
         }
         sendActions(for: .valueChanged)
     }

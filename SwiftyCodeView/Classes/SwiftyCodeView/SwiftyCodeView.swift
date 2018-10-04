@@ -145,7 +145,7 @@ extension SwiftyCodeView: UITextFieldDelegate, SwiftyCodeTextFieldDelegate {
             // prevItem.textField.text = ""
             
             delegate?.codeView(sender: self, didChangeInput: sender.text ?? "")
-
+            
         }
         sendActions(for: .valueChanged)
     }

@@ -71,6 +71,15 @@ open class SwiftyCodeView: UIControl {
             itemView.textField.delegate = self
             itemView.tag = i
             itemView.textField.tag = i
+            
+            // adjust width if number of textfields is less
+            if length < 6 {
+                itemView.textField.addConstraint(NSLayoutConstraint(
+                    item:itemView.textField, attribute:NSLayoutAttribute.width,
+                    relatedBy:NSLayoutRelation.equal,
+                    toItem:nil, attribute:NSLayoutAttribute.notAnAttribute,
+                    multiplier:0, constant:40))
+            }
             stackView.addArrangedSubview(itemView)
         }
     }

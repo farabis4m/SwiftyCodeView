@@ -10,10 +10,14 @@ import UIKit
 public protocol SwiftyCodeViewDelegate: class {
     func codeView(sender: SwiftyCodeView, didFinishInput code: String)
     func codeView(sender: SwiftyCodeView, didChangeInput code: String)
+    func codeView(sender: SwiftyCodeItemView, didBeginEditing textField: UITextField)
+    func codeView(sender: SwiftyCodeItemView, didEndEditing textField: UITextField)
 }
 
 extension SwiftyCodeViewDelegate {
     func codeView(sender: SwiftyCodeView, didChangeInput code: String) {}
+    func codeView(sender: SwiftyCodeItemView, didBeginEditing textField: UITextField) {}
+    func codeView(sender: SwiftyCodeItemView, didEndEditing textField: UITextField) {}
 }
 
 @IBDesignable
@@ -117,6 +121,11 @@ extension SwiftyCodeView: UITextFieldDelegate, SwiftyCodeTextFieldDelegate {
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         
         textField.text = ""
+        
+        let index = textField.tag
+        let item = stackView.arrangedSubviews[index] as! SwiftyCodeItemView
+        delegate?.codeView(sender: item, didBeginEditing: textField)
+        
     }
     
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -139,6 +148,14 @@ extension SwiftyCodeView: UITextFieldDelegate, SwiftyCodeTextFieldDelegate {
         }
         
         return false
+    }
+    
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        let index = textField.tag
+        let item = stackView.arrangedSubviews[index] as! SwiftyCodeItemView
+        delegate?.codeView(sender: item, didEndEditing: textField)
+        
     }
     
     public func deleteBackward(sender: SwiftyCodeTextField) {

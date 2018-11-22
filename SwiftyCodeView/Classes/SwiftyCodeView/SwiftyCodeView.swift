@@ -33,8 +33,8 @@ open class SwiftyCodeView: UIControl {
     var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        stackView.spacing = 6.0
+        stackView.distribution = .fillEqually
         return stackView
     }()
     
@@ -82,7 +82,7 @@ open class SwiftyCodeView: UIControl {
                     item:itemView.textField, attribute:NSLayoutAttribute.width,
                     relatedBy:NSLayoutRelation.equal,
                     toItem:nil, attribute:NSLayoutAttribute.notAnAttribute,
-                    multiplier:0, constant:40))
+                    multiplier:0, constant:itemView.textField.frame.width))
             }
             stackView.addArrangedSubview(itemView)
         }

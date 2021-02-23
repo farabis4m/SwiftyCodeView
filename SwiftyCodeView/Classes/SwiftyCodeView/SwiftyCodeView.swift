@@ -129,11 +129,11 @@ extension SwiftyCodeView: UITextFieldDelegate, SwiftyCodeTextFieldDelegate {
     }
     
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
+
         if string == "" { //is backspace
             return true
         }
-        
+
         if !textField.hasText {
             let index = textField.tag
             let item = stackView.arrangedSubviews[index] as! SwiftyCodeItemView
@@ -143,10 +143,12 @@ extension SwiftyCodeView: UITextFieldDelegate, SwiftyCodeTextFieldDelegate {
                 delegate?.codeView(sender: self, didFinishInput: self.code)
                 textField.resignFirstResponder()
                 return false
+            } else {
+                delegate?.codeView(sender: self, didChangeInput:self.code)
             }
             _ = stackView.arrangedSubviews[index + 1].becomeFirstResponder()
         }
-        
+
         return false
     }
     

@@ -33,8 +33,8 @@ open class SwiftyCodeView: UIControl {
     var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        stackView.spacing = 6.0
+        stackView.distribution = .fillEqually
         return stackView
     }()
     
